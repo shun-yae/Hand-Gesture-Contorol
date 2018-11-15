@@ -4,7 +4,7 @@ import numpy as np
 from keras.models import model_from_json
 
 detect_file1 = "./detect_model/class6.json"
-detect_file2 = "./detect_model/class_6.h5"
+detect_file2 = "./detect_model/class6.h5"
 json = open(detect_file1).read()
 model = model_from_json(json)
 model.load_weights(detect_file2)
@@ -38,7 +38,7 @@ def detection(path):
 def event(frame, num):
     """ Run branch"""
     global gesture_mode
-    result = (res==1 or res==2 or res==3 or res==4)
+    
     if gesture_mode==False and res == 5:
         cv2.putText(frame,
             str(res)+"Please Hand Gesture", (0,350),
@@ -46,7 +46,7 @@ def event(frame, num):
         commands(5)
         gesture_mode = True
 
-    elif gesture_mode and result: 
+    elif gesture_mode and (res in {1,2,3,4}): 
         cv2.putText(frame,
             str(res)+"Please Hand Gesture", (0,350),
             cv2.FONT_HERSHEY_PLAIN, 2, (255,255,0))
